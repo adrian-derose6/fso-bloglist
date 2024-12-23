@@ -56,7 +56,7 @@ const mostLikes = (blogs) => {
   let likeCounts = {}
 
   blogs.forEach((blog) => {
-    likeCounts[blog.author] = likeCounts[blog.author] + blog.likes || blog.likes
+    likeCounts[blog.author] = (likeCounts[blog.author] + blog.likes) || blog.likes
   })
 
   const maxAuthor = Object.keys(likeCounts).reduce((maxAuthor, currentAuthor) => {
