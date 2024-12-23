@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
+const morgan = require('morgan')
 
 // Utils
 const config = require('./utils/config')
@@ -28,6 +29,11 @@ app.use(cors())
 app.use(express.static('dist'))
 app.use(express.json())
 app.use(middleware.requestLogger)
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
+
+morgan.token('body', (req, res, body) => {
+  return JSON.stringify(req.bßody)
+})
 
 app.use('/api/blogs', blogsRouter)
 
